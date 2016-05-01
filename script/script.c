@@ -1,13 +1,14 @@
 // script.cpp : Defines the entry point for the console application.
 //
-#include <malloc.h>
+#include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 #include "types.h"
 #include "script.h"
 #include <ctype.h>
 #include <unistd.h>
 
-__asm__(".symver memcpy ,memcpy@GLIBC_2.2.5");
+//__asm__(".symver memcpy ,memcpy@GLIBC_2.2.5");
 
 int parser_script(void *pbuf, int script_len, FILE *hfile);
 //------------------------------------------------------------------------------------------------------------
@@ -147,7 +148,7 @@ int main(int argc, char* argv[])
 
 		src_length = _get_str_length(src);
 		memcpy(dest, src, src_length);
-		dest[src_length - 0] = NULL;
+		dest[src_length - 0] = '\0';
 		dest[src_length - 1] = 'n';
 		dest[src_length - 2] = 'i';
 		dest[src_length - 3] = 'b';

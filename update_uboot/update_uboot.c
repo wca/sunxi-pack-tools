@@ -1,7 +1,8 @@
 // update_uboot.cpp : Defines the entry point for the console application.
 //
 
-#include <malloc.h>
+#include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 #include "types.h"
 #include "spare_head.h"
@@ -18,6 +19,7 @@ int  align_size;
 
 void *script_file_decode(char *script_name);
 int merge_uboot(char *source_uboot_name, char *script_name);
+int align_uboot(char *source_uboot_name);
 
 int update_for_uboot(char *uboot_name);
 //------------------------------------------------------------------------------------------------------------
@@ -450,7 +452,7 @@ int update_for_uboot(char *uboot_name)
 	//检查uboot的数据结构是否完整
 	align_size = uboot_head->boot_head.align_size;
 	//增加判断:是否是原始uboot
-	if((uboot_head->boot_head.length == uboot_head->boot_head.uboot_length))
+	if (uboot_head->boot_head.length == uboot_head->boot_head.uboot_length)
 	{
 		//uboot长度和原始整体长度一致，表示是原始uboot
 		uboot_head->boot_head.length = length;
